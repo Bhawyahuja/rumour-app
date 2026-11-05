@@ -1,0 +1,68 @@
+rules_version = '2';
+
+// Rumour — Cloud Firestore security rules.
+//
+// Users are anonymous (a random per-install id), so the rules focus on
+// shape validation and immutability rather than ownership:
+//   • room codes must be 6 digits
+//   • members and messages are append-only
+//   • a message can only be posted by a sender id that is a member of the room
+//   • memberCount may only ever go up by one
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isRoomCode(code) {
+      return code is string && code.matches('^[0-9]{6}$');
+    }
+
+    function isNonEmptyString(v, max) {
+      return v is string && v.size() > 0 && v.size() <= max;
+    }
+
+    match /rooms/{code} {
+      allow read: if isRoomCode(code);
+
+      allow create: if isRoomCode(code)
+        && request.resource.data.keys().hasOnly(['code', 'memberCount', 'createdAt', 'lastMessageAt'])
+        && request.resource.data.code == code
+        && request.resource.data.memberCount == 1
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if isRoomCode(code)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberCount', 'lastMessageAt'])
+        && (
+          request.resource.data.memberCount == resource.data.memberCount
+          || request.resource.data.memberCount == resource.data.memberCount + 1
+        );
+
+      allow delete: if false;
+
+      match /members/{userId} {
+        allow read: if isRoomCode(code);
+
+        allow create: if isRoomCode(code)
+          && request.resource.data.keys().hasOnly(['userId', 'alias', 'handle', 'joinedAt'])
+          && request.resource.data.userId == userId
+          && isNonEmptyString(request.resource.data.alias, 40)
+          && isNonEmptyString(request.resource.data.handle, 40)
+          && request.resource.data.joinedAt == request.time;
+
+        allow update, delete: if false;
+      }
+
+      match /messages/{messageId} {
+        allow read: if isRoomCode(code);
+
+        allow create: if isRoomCode(code)
+          && request.resource.data.keys().hasOnly(['text', 'senderId', 'senderAlias', 'createdAt', 'clientCreatedAt'])
+          && isNonEmptyString(request.resource.data.text, 1000)
+          && isNonEmptyString(request.resource.data.senderAlias, 40)
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.clientCreatedAt is timestamp
+          && exists(/databases/$(database)/documents/rooms/$(code)/members/$(request.resource.data.senderId));
+
+        allow update, delete: if false;
+      }
+    }
+  }
+}

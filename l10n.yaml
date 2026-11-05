@@ -1,0 +1,7 @@
+# `flutter pub get` / `flutter run` regenerate lib/core/l10n/gen automatically.
+arb-dir: lib/core/l10n/arb
+template-arb-file: app_en.arb
+output-dir: lib/core/l10n/gen
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
