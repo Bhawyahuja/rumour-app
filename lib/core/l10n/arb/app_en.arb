@@ -1,40 +1,57 @@
 {
   "@@locale": "en",
-
   "appName": "Rumour",
-
   "commonBack": "Back",
   "commonLoading": "Loading",
   "commonRetry": "Retry",
   "commonTryAgain": "Try again",
-
   "themeSwitchToLight": "Switch to light mode",
   "themeSwitchToDark": "Switch to dark mode",
-
   "joinTitle": "Join A Room",
   "joinSubtitle": "Enter the code to join the anon chat room",
   "joinCodeFieldLabel": "Room code",
   "joinChecking": "Checking room",
-
   "identityCaption": "For this room, you are",
   "identityDescription": "This is your anonymous identifier, visible only to others in this room.",
   "identityGenerating": "Generating your anonymous name",
   "identityAcknowledge": "Acknowledge and continue",
-
   "roomTitle": "Room #{code}",
-  "@roomTitle": { "placeholders": { "code": { "type": "String" } } },
+  "@roomTitle": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "roomMembers": "{count, plural, =0{New room} =1{1 member} other{{count} members}}",
-  "@roomMembers": { "placeholders": { "count": { "type": "int" } } },
-
+  "@roomMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatYou": "You",
   "chatHandle": "@{handle}",
-  "@chatHandle": { "placeholders": { "handle": { "type": "String" } } },
+  "@chatHandle": {
+    "placeholders": {
+      "handle": {
+        "type": "String"
+      }
+    }
+  },
   "chatMessageSemantics": "{sender} said {text} at {time}",
   "@chatMessageSemantics": {
     "placeholders": {
-      "sender": { "type": "String" },
-      "text": { "type": "String" },
-      "time": { "type": "String" }
+      "sender": {
+        "type": "String"
+      },
+      "text": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
     }
   },
   "chatCopyHint": "Long press to copy",
@@ -44,23 +61,52 @@
   "chatSend": "Send message",
   "chatLoadingOlder": "Loading older messages",
   "chatLoadFailedTitle": "Couldn't load messages",
-  "chatEmptyTitle": "No rumours yet",
-  "chatEmptySubtitle": "Say something — everyone here only sees your alias.",
+  "chatEmptyTitle": "It's quiet in here",
+  "chatEmptySubtitle": "Be the first to drop a rumour.",
   "chatScrollToLatest": "{count, plural, =0{Scroll to latest} =1{Scroll to latest, 1 new message} other{Scroll to latest, {count} new messages}}",
-  "@chatScrollToLatest": { "placeholders": { "count": { "type": "int" } } },
+  "@chatScrollToLatest": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "chatOfflineBanner": "Connecting… messages will send once you're back online.",
-
+  "notificationChannelName": "Chat messages",
+  "notificationChannelDescription": "New messages in rooms you are part of",
+  "notificationTitle": "@{handle} · Room #{code}",
+  "@notificationTitle": {
+    "placeholders": {
+      "handle": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "dayToday": "Today",
   "dayYesterday": "Yesterday",
-
   "errorNetwork": "You appear to be offline. Check your connection and try again.",
   "errorServer": "Something went wrong. Please try again.",
   "errorPermission": "You are not allowed to do that.",
   "errorRateLimited": "Too many requests. Please slow down and try again.",
   "errorUnexpected": "Unexpected error. Please try again.",
   "errorInvalidRoomCode": "Enter all {length} digits of the room code.",
-  "@errorInvalidRoomCode": { "placeholders": { "length": { "type": "int" } } },
+  "@errorInvalidRoomCode": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
   "errorEmptyMessage": "Message is empty.",
   "errorMessageTooLong": "Messages can be at most {max} characters.",
-  "@errorMessageTooLong": { "placeholders": { "max": { "type": "int" } } }
+  "@errorMessageTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  }
 }

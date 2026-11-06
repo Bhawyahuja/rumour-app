@@ -259,13 +259,13 @@ abstract class AppLocalizations {
   /// No description provided for @chatEmptyTitle.
   ///
   /// In en, this message translates to:
-  /// **'No rumours yet'**
+  /// **'It\'s quiet in here'**
   String get chatEmptyTitle;
 
   /// No description provided for @chatEmptySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Say something — everyone here only sees your alias.'**
+  /// **'Be the first to drop a rumour.'**
   String get chatEmptySubtitle;
 
   /// No description provided for @chatScrollToLatest.
@@ -279,6 +279,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connecting… messages will send once you\'re back online.'**
   String get chatOfflineBanner;
+
+  /// No description provided for @notificationChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat messages'**
+  String get notificationChannelName;
+
+  /// No description provided for @notificationChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'New messages in rooms you are part of'**
+  String get notificationChannelDescription;
+
+  /// No description provided for @notificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'@{handle} · Room #{code}'**
+  String notificationTitle(String handle, String code);
 
   /// No description provided for @dayToday.
   ///

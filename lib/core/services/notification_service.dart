@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rumour/core/l10n/l10n.dart';
 
 /// Local (on-device) notifications for new chat messages.
 abstract interface class NotificationService {
@@ -24,9 +28,13 @@ class LocalNotificationService implements NotificationService {
   bool _initialised = false;
 
   static const String _channelId = 'chat_messages';
-  static const String _channelName = 'Chat messages';
-  static const String _channelDescription =
-      'New messages in rooms you are part of';
+
+  AppLocalizations get _l10n => lookupAppLocalizations(
+        basicLocaleListResolution(
+          PlatformDispatcher.instance.locales,
+          AppLocalizations.supportedLocales,
+        ),
+      );
 
   @override
   Future<void> init() async {
@@ -80,11 +88,12 @@ class LocalNotificationService implements NotificationService {
     required String text,
   }) async {
     if (!_initialised) return;
+    final l10n = _l10n;
     final details = NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
-        _channelName,
-        channelDescription: _channelDescription,
+        l10n.notificationChannelName,
+        channelDescription: l10n.notificationChannelDescription,
         importance: Importance.high,
         priority: Priority.high,
         category: AndroidNotificationCategory.message,
@@ -97,7 +106,7 @@ class LocalNotificationService implements NotificationService {
       await _plugin.show(
         // Unique-ish id so consecutive messages do not overwrite each other.
         DateTime.now().millisecondsSinceEpoch.remainder(1 << 31),
-        '@$sender · Room #$roomCode',
+        l10n.notificationTitle(sender, roomCode),
         text,
         details,
         payload: roomCode,

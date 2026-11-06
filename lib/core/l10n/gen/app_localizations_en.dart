@@ -106,11 +106,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatLoadFailedTitle => 'Couldn\'t load messages';
 
   @override
-  String get chatEmptyTitle => 'No rumours yet';
+  String get chatEmptyTitle => 'It\'s quiet in here';
 
   @override
-  String get chatEmptySubtitle =>
-      'Say something — everyone here only sees your alias.';
+  String get chatEmptySubtitle => 'Be the first to drop a rumour.';
 
   @override
   String chatScrollToLatest(int count) {
@@ -127,6 +126,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get chatOfflineBanner =>
       'Connecting… messages will send once you\'re back online.';
+
+  @override
+  String get notificationChannelName => 'Chat messages';
+
+  @override
+  String get notificationChannelDescription =>
+      'New messages in rooms you are part of';
+
+  @override
+  String notificationTitle(String handle, String code) {
+    return '@$handle · Room #$code';
+  }
 
   @override
   String get dayToday => 'Today';
