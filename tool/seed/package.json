@@ -1,0 +1,11 @@
+{
+  "name": "rumour-seed",
+  "private": true,
+  "description": "Seeds a demo conversation into Cloud Firestore.",
+  "scripts": {
+    "seed": "node seed_room.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0"
+  }
+}

@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Seed tool
+tool/seed/node_modules/
+tool/seed/service-account*.json

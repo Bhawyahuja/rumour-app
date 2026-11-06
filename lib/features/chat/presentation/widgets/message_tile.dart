@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rumour/core/l10n/l10n.dart';
+import 'package:rumour/core/theme/theme.dart';
 import 'package:rumour/core/utils/date_formatter.dart';
 import 'package:rumour/core/widgets/animations/slide_fade_in.dart';
 import 'package:rumour/features/chat/presentation/models/chat_item.dart';
 import 'package:rumour/features/chat/presentation/utils/chat_metrics.dart';
+import 'package:rumour/features/chat/presentation/utils/participant_color.dart';
 import 'package:rumour/features/chat/presentation/widgets/message_bubble.dart';
 import 'package:rumour/features/chat/presentation/widgets/sender_label.dart';
 
@@ -35,6 +37,13 @@ class MessageTile extends StatelessWidget {
                 text: mine
                     ? l10n.chatYou
                     : l10n.chatHandle(message.senderHandle),
+                // Others get a stable per-user colour; "You" stays default.
+                color: mine
+                    ? null
+                    : ParticipantColor.of(
+                        message.senderId,
+                        context.colors.participantColors,
+                      ),
               ),
             Semantics(
               label: l10n.chatMessageSemantics(

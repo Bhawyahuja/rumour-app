@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:rumour/core/theme/theme.dart';
 
 class SenderLabel extends StatelessWidget {
-  const SenderLabel({super.key, required this.text});
+  const SenderLabel({super.key, required this.text, this.color});
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SenderLabel extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: context.text.labelMedium?.copyWith(
-          color: context.colors.textPrimary,
+          color: color ?? context.colors.textPrimary,
         ),
       ),
     );

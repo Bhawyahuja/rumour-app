@@ -26,6 +26,7 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     required this.accent,
     required this.error,
     required this.brandGradient,
+    required this.participantColors,
   });
 
   // Surfaces, lowest → highest emphasis.
@@ -57,6 +58,10 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
   // Feedback.
   final Color error;
 
+  /// Name colours for other chat participants (no lime — that's "you").
+  /// All pass WCAG AA (≥ 4.5:1) on [background].
+  final List<Color> participantColors;
+
   static const AppColorTokens dark = AppColorTokens(
     background: ColorPrimitives.darkBackground,
     surfaceLowest: ColorPrimitives.pureBlack,
@@ -77,6 +82,15 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
       ColorPrimitives.nameGradientStart,
       ColorPrimitives.nameGradientEnd,
     ],
+    participantColors: [
+      Color(0xFF38BDF8), // sky
+      Color(0xFFA78BFA), // violet
+      Color(0xFFF472B6), // pink
+      Color(0xFFFBBF24), // amber
+      Color(0xFFFB923C), // orange
+      Color(0xFF2DD4BF), // teal
+      Color(0xFF818CF8), // indigo
+    ],
   );
 
   static const AppColorTokens light = AppColorTokens(
@@ -96,6 +110,15 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     accent: ColorPrimitives.lime600,
     error: ColorPrimitives.errorLight,
     brandGradient: [ColorPrimitives.lime600, ColorPrimitives.lime700],
+    participantColors: [
+      Color(0xFF0369A1), // sky
+      Color(0xFF6D28D9), // violet
+      Color(0xFFBE185D), // pink
+      Color(0xFFB45309), // amber
+      Color(0xFFC2410C), // orange
+      Color(0xFF0F766E), // teal
+      Color(0xFF4338CA), // indigo
+    ],
   );
 
   @override
@@ -116,6 +139,7 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     Color? accent,
     Color? error,
     List<Color>? brandGradient,
+    List<Color>? participantColors,
   }) {
     return AppColorTokens(
       background: background ?? this.background,
@@ -134,6 +158,7 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
       accent: accent ?? this.accent,
       error: error ?? this.error,
       brandGradient: brandGradient ?? this.brandGradient,
+      participantColors: participantColors ?? this.participantColors,
     );
   }
 
@@ -160,6 +185,10 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
       brandGradient: [
         c(brandGradient.first, other.brandGradient.first),
         c(brandGradient.last, other.brandGradient.last),
+      ],
+      participantColors: [
+        for (var i = 0; i < participantColors.length; i++)
+          c(participantColors[i], other.participantColors[i]),
       ],
     );
   }
